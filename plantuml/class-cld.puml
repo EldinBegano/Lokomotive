@@ -1,0 +1,68 @@
+@startuml
+
+'!theme plain
+'top to bottom direction
+skinparam linetype ortho
+
+class Locomotive {
+  - firstWagon: Wagon
+  - speed: double
+  - weight: double
+  - length: int
+  --
+  + Locomotive()
+  --
+  + getFirstWagon(): Wagon
+  + setFirstWagon(Wagon): void
+  + addWagon(Wagon): void
+  + toString(): String
+}
+class GueterWagon {
+- payload: Object
+--
++GueterWagon(weight, speed, length, payload, next)
++GueterWagon(weight, speed, length, payload)
++GueterWagon()
+--
++ getPayload(): Object
++ setPayload(payload): void
++ toString(): String
+}
+class Personenwagon {
+- anzahl: int
+--
++Personenwagon(weight, speed, length, anzahl, next)
++Personenwagon(weight, speed, length, anzahl)
++Personenwagon()
+--
++ getAnzahl(): int
++ setAnzahl(anzahl): void
++ toString(): String
+}
+class Wagon {
+  - weight: int
+  - length: int
+  - speed: int
+  - next: Wagon
+  --
+  + Wagon(weight, speed, length, Wagon)
+  + Wagon(weigth, speed, length)
+  + Wagon()
+  --
+  + getNext(): Wagon
+  + setNext(Wagon): void
+  + getWeight(): int
+  + setWeight(weight):
+  + getSpeed(): int
+  + setSpeed(speed): void
+  + getLength(): int
+  + setLength(length): void
+  + toString(): String
+}
+
+Locomotive "firstwagon\n1" ---> "0..1" Wagon
+Wagon "next\n1" ---> "0..1" GueterWagon
+Wagon "next\n1" ---> "0..1" Personenwagon
+GueterWagon "next\n1\n" ---> "\n0..1" Wagon
+Personenwagon "next\n1\n" ---> "\n0..1" Wagon
+@enduml
